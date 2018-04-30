@@ -1,7 +1,7 @@
 {
   "name": "synavox-live",
   "version": "1.0.0",
-  "description": "nobleIQ's Synavox-Live Audio Adherence Platform",
+  "description": "nobleIQ's Synavox-Live Audio Adherence Admin Platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,13 +13,14 @@
   "keywords": [
     "nobleIQ",
     "Synavox",
-    "Synavox-Live"
+    "Synavox-Live",
+    "Synavox-Live-Admin"
   ],
   "author": "Craig Jacobs",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cwjacobs/synavox-live-pharmacy.git"
+    "url": "https://github.com/cwjacobs/synavox-live-admin.git"
   },
   "dependencies": {
     "bootstrap": "^4.1.0",
