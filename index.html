@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <!-- bootstrap related files -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+
+  <!-- jquery import -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <!-- font awesome for the icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Hover styles -->
+  <link rel="stylesheet" href="content/hover.css" />
+
+  <!-- custom styles -->
+  <link href="app/styles/nobleiq.css" rel="stylesheet" />
+
+  <title>Synavox Live</title>
+  <link rel="icon" href="./resources/graphics/IQ-opaque.bmp" />
+
+  <!-- firebase related files -->
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDWoBUhqcPPNNsHGPM1x5eI6gRRYTXNWPM",
+      authDomain: "synavox-live.firebaseapp.com",
+      databaseURL: "https://synavox-live.firebaseio.com",
+      projectId: "synavox-live",
+      storageBucket: "synavox-live.appspot.com",
+      messagingSenderId: "341085923340"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <!-- Hack required to keep from getting errors in compiled js code -->
+  <script> var exports = {}; </script>
+
+  <!-- nobleIQ application js script bundle -->
+  <script src="js/bundle.js"></script>
+
+  <!-- Firebase initialize script -->
+  <!-- <script src="app/database/initialize.js"></script> -->
+
+  <!-- <script src="data.js"></script> -->
+  <!-- <script src="initialize.js"></script> -->
+  <!-- filtering scripts -->
+  <!-- <script src="filter.js"></script> -->
+  <!-- custom script -->
+  <!-- <script src="script.js"></script> -->
+
+</head>
+
+<body>
+
+  <!-- Debug aid, screen size banner -->
+  <div class="text-dark">
+    <h6 class="d-none d-lg-none d-md-none d-sm-none d-xl-block" style="text-align: center; background-color: dodgerblue; border-radius: 2px">Display Size: XL</h6>
+    <h6 class="d-none d-xl-none d-md-none d-sm-none d-lg-block" style="text-align: center; background-color: yellowgreen; border-radius: 2px">Display Size: LG</h6>
+    <h6 class="d-none d-xl-none d-lg-none d-sm-none d-md-block" style="text-align: center; background-color: blueviolet; border-radius: 2px">Display Size: MD</h6>
+    <h6 class="d-none d-xl-none d-lg-none d-md-none d-sm-block" style="text-align: center; background-color: mediumvioletred; border-radius: 2px">Display Size: SM</h6>
+    <h6 class="d-xl-none d-lg-none d-md-none d-sm-none" style="text-align: center; background-color: chartreuse; border-radius: 2px">Display Size: XS</h6>
+  </div>
+
+  <div class="container-fluid" style="border: solid; border-color: wheat; border-width: thin; padding: 15px; padding-top: 5px">
+
+    <div class="jumbotron alert-success" style="margin-bottom: 20px; text-align: left; border-radius: 16px; border-style: solid; border-width: thin; padding: 10px">
+      <div class="row">
+        <div class="col-sm-1">
+          <img src="./resources/graphics/IQ-opaque.bmp" class="img-fluid" height="92" width="92" />
+        </div>
+        <div class="col-sm-3" style="padding-left: 0px">
+          <h2 style="text-align: left">nobleIQ</h2>
+          <p>Audio Assisted Adherence</p>
+        </div>
+        <div class="col-sm-6" style="padding-left: 0px" id="dashboard">
+          <h2 style="text-align: left">Administrator Dashboard</h2>
+        </div>
+        <div class="col-sm-2" style="padding: 20px; padding-left: 80px">
+          <div class="btn btn-outline-info hvr-shutter-in-horizontal">
+            <a href="index.html">Pharmacist</a>
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- button to restore default synavox-live medicine data -->
+    <button class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px" id="restore-data">
+      Restore Data
+      <i class="fa fa-ambulance" aria-hidden="true"></i>
+    </button>
+
+    <!-- button to create an employee -->
+    <button class="btn btn-success" style="margin-bottom: 20px" id="createEmployee">
+      Create Employee
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+
+    <!-- <div style="display:inherit"></div> -->
+
+    <!-- Filters drop down -->
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Default Employee Filters
+        <i class="fa fa-filter" aria-hidden="true"></i>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" id="onlyMalesFilter"> Male only</a>
+        <a class="dropdown-item" id="fullTimeFilter"> Full-time only</a>
+        <a class="dropdown-item" id="olderThenFilter"> Older than 30</a>
+        <a class="dropdown-item" id="ageBetweenFilter"> Older than 35, but younger than 50</a>
+        <a class="dropdown-item" id="yearsOfExperienceFilter"> Female and 2 to 30 years of experience</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" id="clearFilter"> Clear Filter</a>
+      </div>
+    </div>
+
+    <!-- input to seach for an employee -->
+    <input class="btn btn-default  pull-right" placeholder="Search by name..." id="searchEmployee"> </input>
+
+    <div id="operationStatus"></div>
+
+    <div class="employeeForm">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="fname">First Name</label>
+          <input type="text" class="form-control" id="fname" placeholder="First Name">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="lname">Last Name</label>
+          <input type="text" class="form-control" id="lname" placeholder="Last Name">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Email address">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="age">Age</label>
+          <input type="number" class="form-control" id="age">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="gender">Gender</label>
+          <select id="gender" class="form-control">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="yearsOfExperience">Years of Experience</label>
+          <input type="text" class="form-control" id="yearsOfExperience">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" id="isFullTime"> Check this if he/she is a full time employee.
+          </label>
+        </div>
+      </div>
+      <div class=text-right>
+        <button class="btn btn-default" id="cancel">Cancel</button>
+        <button class="btn btn-primary" id="dynamicBtn"></button>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <thead class="thead-inverse">
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Years of experience</th>
+          <th scope="col">Full Time</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody class="tbodyData">
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
