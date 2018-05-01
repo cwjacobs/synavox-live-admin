@@ -92,23 +92,23 @@
         </div>
         <div class="col-sm-2" style="padding: 20px; padding-left: 80px">
           <div class="btn btn-outline-info hvr-shutter-in-horizontal">
-            <a href="index.html">Pharmacist</a>
+            <a href="http://localhost:7000/index.html" target="_blank">Pharmacist</a>
             <i class="fa fa-user-md" aria-hidden="true"></i>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- button to restore default synavox-live medicine data -->
+    <!-- button to create an employee -->
+    <button class="btn btn-success" style="margin-bottom: 20px" id="createMedicineCategory">
+      Create Medicine Category
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+
     <button class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px" id="restore-data">
       Restore Data
       <i class="fa fa-ambulance" aria-hidden="true"></i>
-    </button>
-
-    <!-- button to create an employee -->
-    <button class="btn btn-success" style="margin-bottom: 20px" id="createEmployee">
-      Create Employee
-      <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
 
     <!-- <div style="display:inherit"></div> -->
@@ -116,11 +116,11 @@
     <!-- Filters drop down -->
     <div class="btn-group pull-right">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Default Employee Filters
+        Medicine Filter
         <i class="fa fa-filter" aria-hidden="true"></i>
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" id="onlyMalesFilter"> Male only</a>
+        <a class="dropdown-item" id="categoryNameFilter"> Male only</a>
         <a class="dropdown-item" id="fullTimeFilter"> Full-time only</a>
         <a class="dropdown-item" id="olderThenFilter"> Older than 30</a>
         <a class="dropdown-item" id="ageBetweenFilter"> Older than 35, but younger than 50</a>
@@ -131,17 +131,26 @@
     </div>
 
     <!-- input to seach for an employee -->
-    <input class="btn btn-default  pull-right" placeholder="Search by name..." id="searchEmployee"> </input>
+    <input class="btn btn-default pull-right" placeholder="Search by category..." id="searchMedicines"></input>
 
     <div id="operationStatus"></div>
 
-    <div class="employeeForm">
+    <div class="createCategoryForm">
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="fname">First Name</label>
-          <input type="text" class="form-control" id="fname" placeholder="First Name">
+        <div class="form-group col-sm-4">
+          <label for="category-name">Category Name</label>
+          <input type="text" class="form-control" id="category-name" placeholder="Category Name">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-sm-6">
+          <label for="category-description">Category Description</label>
+          <input type="text" class="form-control" id="category-description">
+        </div>
+        <div class="text-right col-sm-2" style="padding: 30px; padding-right: 5px">
+          <button class="btn btn-default" id="cancel">Cancel</button>
+          <button class="btn btn-primary" id="save">Save</button>
+        </div>
+
+        <!-- <div class="form-group col-md-4">
           <label for="lname">Last Name</label>
           <input type="text" class="form-control" id="lname" placeholder="Last Name">
         </div>
@@ -149,56 +158,49 @@
           <label for="email">Email address</label>
           <input type="email" class="form-control" id="email" placeholder="Email address">
         </div>
-      </div>
+      </div> -->
 
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="age">Age</label>
-          <input type="number" class="form-control" id="age">
+        <div class="form-row">
+          <!-- <div class="form-group col-md-4">
+            <label for="category-description">Category Description</label>
+            <input type="text" class="form-control" id="category-description">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-control">
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="yearsOfExperience">Years of Experience</label>
+            <input type="text" class="form-control" id="yearsOfExperience">
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="gender">Gender</label>
-          <select id="gender" class="form-control">
-            <option>Male</option>
-            <option>Female</option>
-          </select>
+        <div class="form-group">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="isFullTime"> Check this if he/she is a full time employee.
+            </label>
+          </div>
+        </div> -->
         </div>
-        <div class="form-group col-md-4">
-          <label for="yearsOfExperience">Years of Experience</label>
-          <input type="text" class="form-control" id="yearsOfExperience">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="isFullTime"> Check this if he/she is a full time employee.
-          </label>
-        </div>
-      </div>
-      <div class=text-right>
-        <button class="btn btn-default" id="cancel">Cancel</button>
-        <button class="btn btn-primary" id="dynamicBtn"></button>
-      </div>
-    </div>
 
-    <table class="table table-striped">
-      <thead class="thead-inverse">
-        <tr>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Age</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Years of experience</th>
-          <th scope="col">Full Time</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
-        </tr>
-      </thead>
-      <tbody class="tbodyData">
-      </tbody>
-    </table>
-  </div>
+        <table class="table table-striped">
+          <thead class="thead-inverse">
+            <tr>
+              <th scope="col">Medicine Name</th>
+              <th scope="col">Manufacturer</th>
+              <th scope="col">Distributor</th>
+              <th scope="col">Generic</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody class="tbodyData">
+          </tbody>
+        </table>
+      </div>
 </body>
 
 </html>

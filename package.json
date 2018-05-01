@@ -1,11 +1,11 @@
 {
-  "name": "synavox-live",
+  "name": "synavox-live-admin",
   "version": "1.0.0",
   "description": "nobleIQ's Synavox-Live Audio Adherence Admin Platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "http-server -a localhost -p 7000 -o",
+    "serve": "http-server -a localhost -p 7001 -o",
     "compile": "tsc",
     "browserify": "browserify ./app/app.ts -p [ tsify --noImplicitAny ] > ./js/bundle.js --debug ",
     "build": "npm run compile && npm run browserify"

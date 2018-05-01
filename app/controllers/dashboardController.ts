@@ -1,14 +1,11 @@
-
+import { KeyValuePair_Str_Str } from "../interfaces/iKeyValuePairs"
 import { Database } from "../database/database"
 import { PanelViewFactory } from "../factories/panelViewFactory"
-
-interface KeyValuePair {
-    [key: string]: string;
-}
+import { MedicineDataModel } from "../models/medicineDataModel";
 
 export class DashboardController {
 
-    static cssClassSelector: KeyValuePair = {
+    static cssClassSelector: KeyValuePair_Str_Str = {
         ["English"]: "bg-primary",
         ["Spanish"]: "bg-warning",
         ["Mandarin"]: "bg-danger"
@@ -19,13 +16,25 @@ export class DashboardController {
 
     async buildDashboardAsync() {
 
-        let medicineCollection = await this.database.getMedicineCollectionAsync();
+        this.database = new Database();
+        this.database.initialize_db();
 
-        let medicinePanelViews: HTMLElement[] = new PanelViewFactory().createPanelViews_Model(medicineCollection);
+        let medicineCollection = await this.database.getRemoteMedicineCollectionAsync();
 
-        medicinePanelViews.forEach(view => {
-            $('#medicine-panel').append(view);
-        });
+        this.logMedicineCollection(medicineCollection);
+
+        // medicineCollection.forEach(e => {
+        //     console.log(`Category: ${e.category}`);
+        //     e.medicineList.forEach(m => {
+        //         console.log(`\tMedicine: ${m}`);
+        //     })
+        // });
+
+        //let medicinePanelViews: HTMLElement[] = new PanelViewFactory().createPanelViews_Model(medicineCollection);
+
+        // medicinePanelViews.forEach(view => {
+        //     $('#medicine-panel').append(view);
+        // });
     }
 
     selectMedicineCategory(e: JQuery.Event): void {
@@ -82,4 +91,13 @@ export class DashboardController {
 
         $('#download').removeClass('bg-primary').removeClass('bg-warning').removeClass('bg-danger').addClass(cssClass).show();
     };
+
+    logMedicineCollection(collection: Array<MedicineDataModel>): void {
+        collection.forEach(e => {
+            console.log(`Category: ${e.category}`);
+            e.medicineList.forEach(m => {
+                console.log(`\tMedicine: ${m}`);
+            })
+        });
+    }
 };

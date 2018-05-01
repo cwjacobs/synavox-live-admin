@@ -1,33 +1,43 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import { Configuration } from "./firebaseConfigs"
+
+// Import Firebase / Firestore definitions
+//
+import * as firebase from 'firebase'
+import 'firebase/firestore'
 
 export class Firestore_db {
 
     mainApp: firebase.app.App;
+    firestore: firebase.firestore.Firestore;
+    static settings = { timestampsInSnapshots: true };
 
-    initialize(): firebase.firestore.CollectionReference {
+    constructor() {
+    }
 
-        const settings = { timestampsInSnapshots: true };
+    initialize(firebaseConfig: Configuration): void {
+        //const settings = { timestampsInSnapshots: true };
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDWoBUhqcPPNNsHGPM1x5eI6gRRYTXNWPM",
-            authDomain: "synavox-live.firebaseapp.com",
-            databaseURL: "https://synavox-live.firebaseio.com",
-            projectId: "synavox-live",
-            storageBucket: "synavox-live.appspot.com",
-            messagingSenderId: "341085923340"
-        };
+        // const firebaseConfig = {
+        //     apiKey: "AIzaSyDWoBUhqcPPNNsHGPM1x5eI6gRRYTXNWPM",
+        //     authDomain: "synavox-live.firebaseapp.com",
+        //     databaseURL: "https://synavox-live.firebaseio.com",
+        //     projectId: "synavox-live",
+        //     storageBucket: "synavox-live.appspot.com",
+        //     messagingSenderId: "341085923340"
+        // };
 
         this.mainApp = firebase.initializeApp(firebaseConfig, "synavox-live");
 
-        const firestore = firebase.firestore(this.mainApp);
-        firestore.settings(settings);
-
-        let medicineCategoriesRef: firebase.firestore.CollectionReference = firestore.collection("medicineCategories");
+        // const firestore = firebase.firestore(this.mainApp);
+        // firestore.settings(settings);
+        firebase.firestore(this.mainApp).settings(Firestore_db.settings);
 
         console.log(`Firebase app name: ${this.mainApp.name}`);
+    }
 
-        return medicineCategoriesRef;
+    getDatabaseReference(requestedCollection: string): firebase.firestore.CollectionReference {
+        let requestedCollectionRef: firebase.firestore.CollectionReference = firebase.firestore(this.mainApp).collection(requestedCollection);
+        return requestedCollectionRef;
     }
 
     restoreDefaultData(collectionReference: firebase.firestore.CollectionReference): void {
