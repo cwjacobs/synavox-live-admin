@@ -5,7 +5,7 @@ import { Configuration } from "./firebaseConfigs"
 import * as firebase from 'firebase'
 import 'firebase/firestore'
 
-export class Firestore_db {
+export class Firestore {
 
     mainApp: firebase.app.App;
     firestore: firebase.firestore.Firestore;
@@ -15,22 +15,9 @@ export class Firestore_db {
     }
 
     initialize(firebaseConfig: Configuration): void {
-        //const settings = { timestampsInSnapshots: true };
+        this.mainApp = firebase.initializeApp(firebaseConfig, firebaseConfig.projectId);
 
-        // const firebaseConfig = {
-        //     apiKey: "AIzaSyDWoBUhqcPPNNsHGPM1x5eI6gRRYTXNWPM",
-        //     authDomain: "synavox-live.firebaseapp.com",
-        //     databaseURL: "https://synavox-live.firebaseio.com",
-        //     projectId: "synavox-live",
-        //     storageBucket: "synavox-live.appspot.com",
-        //     messagingSenderId: "341085923340"
-        // };
-
-        this.mainApp = firebase.initializeApp(firebaseConfig, "synavox-live");
-
-        // const firestore = firebase.firestore(this.mainApp);
-        // firestore.settings(settings);
-        firebase.firestore(this.mainApp).settings(Firestore_db.settings);
+        firebase.firestore(this.mainApp).settings(Firestore.settings);
 
         console.log(`Firebase app name: ${this.mainApp.name}`);
     }

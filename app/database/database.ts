@@ -1,4 +1,4 @@
-import { Firestore_db } from "./firestore_db"
+import { Firestore } from "./firestore"
 import { Configuration } from "./firebaseConfigs"
 import { FirebaseConfig } from "./firebaseConfigs"
 import { MedicineDataModel } from "../models/medicineDataModel"
@@ -10,11 +10,11 @@ import 'firebase/firestore'
 
 export class Database {
 
-    firestore_db: Firestore_db;
+    firestore_db: Firestore;
     firebaseConfig: FirebaseConfig;
 
     constructor() {
-        this.firestore_db = new Firestore_db();
+        this.firestore_db = new Firestore();
         this.firebaseConfig = new FirebaseConfig();
     }
 

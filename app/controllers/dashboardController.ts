@@ -1,11 +1,14 @@
-import { KeyValuePair_Str_Str } from "../interfaces/iKeyValuePairs"
 import { Database } from "../database/database"
 import { PanelViewFactory } from "../factories/panelViewFactory"
 import { MedicineDataModel } from "../models/medicineDataModel";
 
+interface KeyValuePair {
+    [key: string]: string;
+}
+
 export class DashboardController {
 
-    static cssClassSelector: KeyValuePair_Str_Str = {
+    static cssClassSelector: KeyValuePair = {
         ["English"]: "bg-primary",
         ["Spanish"]: "bg-warning",
         ["Mandarin"]: "bg-danger"
