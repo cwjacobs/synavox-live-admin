@@ -1,6 +1,5 @@
-import { Firestore } from "./firestore"
-import { Configuration } from "./firebaseConfigs"
-import { FirebaseConfig } from "./firebaseConfigs"
+import { FirestoreConfig } from "./firebaseConfigs"
+import { SynavoxFirestore } from "./synavoxFirestore"
 import { MedicineDataModel } from "../models/medicineDataModel"
 
 // Import Firebase / Firestore definitions
@@ -10,12 +9,12 @@ import 'firebase/firestore'
 
 export class Database {
 
-    firestore_db: Firestore;
-    firebaseConfig: FirebaseConfig;
+    firestore_db: SynavoxFirestore;
+    firestore_dbConfig: FirestoreConfig;
 
     constructor() {
-        this.firestore_db = new Firestore();
-        this.firebaseConfig = new FirebaseConfig();
+        this.firestore_db = new SynavoxFirestore();
+        this.firestore_dbConfig = new FirestoreConfig();
     }
 
     private static testCollection: MedicineDataModel[] = [
@@ -31,8 +30,8 @@ export class Database {
         return Database.testCollection;
     };
 
-    initialize_db() {
-        this.firestore_db.initialize(this.firebaseConfig.getFirebaseConfig("admin"));
+    initialize(configurationName: string) {
+        this.firestore_db.initialize(configurationName);
     }
 
     // Gets every medication in the db, might need to add functionality as db grows

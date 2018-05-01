@@ -20,7 +20,7 @@ export class DashboardController {
     async buildDashboardAsync() {
 
         this.database = new Database();
-        this.database.initialize_db();
+        this.database.initialize("admin");
 
         let medicineCollection = await this.database.getRemoteMedicineCollectionAsync();
 

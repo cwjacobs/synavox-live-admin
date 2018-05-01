@@ -11,7 +11,7 @@ export interface Configuration {
     messagingSenderId: string;
 };
 
-export class FirebaseConfig {
+export class FirestoreConfig {
 
     private static configurations: KeyValuePair = {
         ["admin"]: {
@@ -34,7 +34,7 @@ export class FirebaseConfig {
     };
 
     getFirebaseConfig(name: string): Configuration {
-        return FirebaseConfig.configurations[name];
+        return FirestoreConfig.configurations[name];
     };
 };
 
