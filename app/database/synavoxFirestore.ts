@@ -32,38 +32,9 @@ export class SynavoxFirestore {
         return requestedCollectionRef;
     };
 
-    restoreDefaultData(collectionReference: firebase.firestore.CollectionReference): void {
-
-        const setOptions = {
-            merge: true
-        };
-
-        collectionReference.doc("Cholesterol").set({
-            category: "Cholesterol",
-            medicines: ["Atorvastatin", "Rosuvastatin", "Lipitor", "Crestor"],
-        }, setOptions);
-
-        collectionReference.doc("Hypertension").set({
-            category: "Hypertension",
-            medicines: ["Lisinopril", "Amlodipine", "Benicar", "Losartan", "Carvedilol"],
-        }, setOptions);
-
-        collectionReference.doc("Diabetes-Type1").set({
-            category: "Diabetes-Type1",
-            medicines: ["Apidra", "Lantus", "Humalog", "Novalog"],
-        }, setOptions);
-
-        collectionReference.doc("Diabetes-Type2").set({
-            category: "Diabetes-Type2",
-            medicines: ["Victoza", "Januvia", "Metformin", "Glucophage"],
-        }, setOptions);
-
-        collectionReference.doc("Anticoagulants").set({
-            category: "Anticoagulants",
-            medicines: ["Warfarin", "Acenocoumarol", "Phenprocoumon", "Dabigatran", "Apixaban"],
-        }, setOptions);
-
-        return;
+    getDatabaseSubreference(parentCollection: firebase.firestore.CollectionReference, subCollection: string): firebase.firestore.CollectionReference {
+        let requestedCollectionRef: firebase.firestore.CollectionReference = parentCollection.doc().collection("Cholesterol");
+        return requestedCollectionRef;
     };
 }
 

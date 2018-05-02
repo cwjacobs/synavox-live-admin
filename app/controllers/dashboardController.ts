@@ -1,6 +1,7 @@
 import { Database } from "../database/database"
 import { PanelViewFactory } from "../factories/panelViewFactory"
-import { MedicineDataModel } from "../models/medicineDataModel";
+import { CategoryDataModel } from "../models/categoryDataModel";
+import { Utilities } from "../utilities";
 
 interface KeyValuePair {
     [key: string]: string;
@@ -17,14 +18,17 @@ export class DashboardController {
     medicineName: string;
     database: Database = new Database();
 
+    get dataBase(): Database {
+        return this.database;
+    }
+
     async buildDashboardAsync() {
 
         this.database = new Database();
         this.database.initialize("admin");
 
         let medicineCollection = await this.database.getRemoteMedicineCollectionAsync();
-
-        this.logMedicineCollection(medicineCollection);
+        Utilities.logMedicineCollection(medicineCollection);
 
         // medicineCollection.forEach(e => {
         //     console.log(`Category: ${e.category}`);
@@ -95,7 +99,7 @@ export class DashboardController {
         $('#download').removeClass('bg-primary').removeClass('bg-warning').removeClass('bg-danger').addClass(cssClass).show();
     };
 
-    logMedicineCollection(collection: Array<MedicineDataModel>): void {
+    logMedicineCollection(collection: Array<CategoryDataModel>): void {
         collection.forEach(e => {
             console.log(`Category: ${e.category}`);
             e.medicineList.forEach(m => {

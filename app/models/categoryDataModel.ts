@@ -1,11 +1,13 @@
-export class MedicineDataModel {
-    
-    category: string;
-    medicineList: string[];
+import { MedicineDataModel } from "./medicineDataModel"
 
-    constructor(category: string, medicineList: string[]) {
-        this.category = category;
-        this.medicineList = medicineList;
+export class CategoryDataModel {
+
+    // category: string;
+    // medicineList: Array<MedicineDataModel>;
+
+    constructor(public category: string, public medicineList: Array<MedicineDataModel> = new Array<MedicineDataModel>()) {
+        // this.category = category;
+        // this.medicineList = medicineList;
     };
 };
 
