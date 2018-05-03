@@ -7,14 +7,25 @@ import { Utilities } from "./utilities"
 
 $(document).ready(function () {
 
-    let dashboardController = new DashboardController();
+    // Initialze Application
+    //
+    let database: Database = new Database();
+    database.initialize("admin");
 
-    dashboardController.buildDashboardAsync();
+    let dashboardController = new DashboardController(database);
+
+    $(document).on('change', '#category-selector', function (e) {
+        // Remove the initial 'Select Category...' option
+        //
+        $('#category-greeting').remove();
+
+        // Display list of selected category medicines
+        //
+        let selectedCategory: string = $(this).find('option:selected').text();
+        dashboardController.selectCategoryAsync(selectedCategory);
+    });
 
     $(document).on('click', '#restore-data', function (e) {
-        //let database: Database = new Database();
-        //database.initialize("admin");
-        let database = dashboardController.dataBase;
         database.storeDefaultData();
     });
 
@@ -22,9 +33,4 @@ $(document).ready(function () {
         let testData: CategoryDataModel[] = Database.getTestCollection();
         Utilities.logMedicineCollection(testData);
     });
-
-    // $(document).on('click', '.language-selector', function (e) {
-    //     let language: string | null = e.target.textContent !== null ? e.target.textContent : "null";
-    //     dashboardController.selectLanguage(language);
-    // });
 });
