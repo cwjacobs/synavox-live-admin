@@ -66,7 +66,6 @@
 </head>
 
 <body>
-
   <!-- Debug aid, screen size banner -->
   <div class="text-dark">
     <h6 class="d-none d-lg-none d-md-none d-sm-none d-xl-block" style="text-align: center; background-color: dodgerblue; border-radius: 2px">Display Size: XL</h6>
@@ -76,8 +75,10 @@
     <h6 class="d-xl-none d-lg-none d-md-none d-sm-none" style="text-align: center; background-color: chartreuse; border-radius: 2px">Display Size: XS</h6>
   </div>
 
+  <!-- Administrator Dashboard Container -->
   <div class="container-fluid" style="border: solid; border-color: wheat; border-width: thin; padding: 15px; padding-top: 5px">
 
+    <!-- nobleIQ jumbotron -->
     <div class="jumbotron alert-success" style="margin-bottom: 20px; text-align: left; border-radius: 16px; border-style: solid; border-width: thin; padding: 10px">
       <div class="row">
         <div class="col-sm-1">
@@ -99,20 +100,22 @@
       </div>
     </div>
 
-    <!-- button to restore default synavox-live medicine data -->
-    <!-- button to create an employee -->
+    <!-- button to create a medicine category -->
     <button class="btn btn-success" style="margin-bottom: 20px" id="createMedicineCategory">
       Create Medicine Category
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
 
-    <button visibility: hidden class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px;" id="restore-data"
-      disabled>
+    <!-- Restore Data -->
+    <button visibility: visible class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px;"
+      id="restore-data">
       Restore Data
       <i class="fa fa-ambulance" aria-hidden="true"></i>
     </button>
 
-    <button visibility: hidden class="btn btn-outline-warning hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px" id="log-testdata">
+    <!-- Log Data to Console -->
+    <button visibility: visible class="btn btn-outline-warning hvr-shutter-in-horizontal" style="margin-bottom: 20px; margin-right: 20px"
+      id="log-testdata">
       Log Test Data
       <i class="fa fa-edit" aria-hidden="true"></i>
     </button>
@@ -139,90 +142,93 @@
     <!-- input to seach for an employee -->
     <input class="btn btn-default pull-right" placeholder="Search by category..." id="searchMedicines"></input>
 
-    <div id="operationStatus"></div>
+    <!-- <div id="operationStatus"></div> -->
 
-    <div class="createCategoryForm">
-      <div class="form-row">
-        <div class="form-group col-sm-4">
-          <!-- <label for="category-name">Category</label> -->
-          <!-- <input type="text" class="form-control" id="category-name" placeholder="Category Name"> -->
-          <form>
-            <div class="form-group">
-              <label for="category-selector">Category list (select one):</label>
-              <select class="form-control" id="category-selector" placeholder="Select category...">
-                  <option selected id="category-greeting">Select category...</option>
-                  <option>Cholesterol</option>
-                  <option>Diabetes Type-1</option>
-                <option>Diabetes Type-2</option>
-                <option>Hypertension</option>
-                <option>Anticoaculants</option>
-              </select>
-            </div>
-          </form>
-
-        </div>
-        <div class="form-group col-sm-6">
-          <label for="category-description">Category Description</label>
-          <input type="text" class="form-control" id="category-description">
-        </div>
-        <div class="text-right col-sm-2" style="padding: 30px; padding-right: 5px">
-          <button class="btn btn-outline-danger hvr-shutter-in-horizontal" id="cancel">Cancel</button>
-          <button class="btn btn-outine-primary hvr-shutter-in-horizontal" id="save">Save</button>
-        </div>
-
-        <!-- <div class="form-group col-md-4">
-          <label for="lname">Last Name</label>
-          <input type="text" class="form-control" id="lname" placeholder="Last Name">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Email address">
-        </div>
-      </div> -->
-
-        <!-- <div class="form-row">
-          <div class="form-group col-md-4">
+    <!-- Select Medicine Category Form -->
+    <div class="selectMedicineCategoryForm">
+      <form>
+        <div class="form-row" style="margin-bottom: 30px">
+          <!-- Medicine Category List Dropdown Menu -->
+          <div class="col-md-2">
+            <label for="category-selector">Category list (select one):</label>
+            <select class="form-control" id="category-selector">
+              <option selected id="category-greeting">Select category...</option>
+              <option>Cholesterol</option>
+              <option>Diabetes Type-1</option>
+              <option>Diabetes Type-2</option>
+              <option>Hypertension</option>
+              <option>Anticoaculants</option>
+            </select>
+          </div>
+          <!-- Medicine Category Description Textbox -->
+          <div class="col-md-8">
             <label for="category-description">Category Description</label>
             <input type="text" class="form-control" id="category-description">
           </div>
-          <div class="form-group col-md-4">
-            <label for="gender">Gender</label>
-            <select id="gender" class="form-control">
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="yearsOfExperience">Years of Experience</label>
-            <input type="text" class="form-control" id="yearsOfExperience">
-          </div>
         </div>
-        <div class="form-group">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" id="isFullTime"> Check this if he/she is a full time employee.
-            </label>
-          </div>
-        </div>
-      </div> -->
-      <div class="form-group">
-        <table class="table table-striped" id="category-medicine-list">
-          <thead class="thead-inverse">
-            <tr>
-              <th scope="col">Medicine Name</th>
-              <th scope="col">Alternative Name</th>
-              <th scope="col">Manufacturer</th>
-              <th scope="col">Distributor</th>
-              <th scope="col">Generic</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody class="tbodyData">
-          </tbody>
-        </table>
-      </div>
+      </form>
     </div>
+
+    <!-- Edit Medicine Information -->
+    <div class="editMedicineForm">
+      <div class="form-row"  style="margin-bottom: 20px" id="edit-Medicine">
+        <!-- Edit Medicine Name -->
+        <div class="col-md-2">
+          <label for="aName">Medicine Name</label>
+          <input type="text" class="col-md-12" id="aName" placeholder="Medicine Name">
+        </div>
+        <!-- Edit Medicine Alternative Name -->
+        <div class="col-md-2">
+          <label for="altName">Alternative Name</label>
+          <input type="text" class="col-md-12" id="altName" placeholder="Also known as...">
+        </div>
+        <!-- Edit Medicine Manufacturer -->
+        <div class="col-md-3">
+          <label for="manufacturer">Manufacturer</label>
+          <input type="text" class="col-md-12" id="manufacturer" placeholder="Manufacturer">
+        </div>
+        <!-- Edit Medicine Distributor -->
+        <div class="col-md-3">
+          <label for="distributor">Distributor</label>
+          <input type="text" class="col-md-12" id="distributor" placeholder="Distributor">
+        </div>
+      </div>
+      <div class="form-row">
+        <!-- Is Generic Checkbox -->
+        <div class="form-check col-md-8" id="is-generic">
+          <label class="form-check-label" for="isGenertic">
+            <input class="form-check-input" type="checkbox" id="isGenertic"> Check this if this is a generic medication.
+          </label>
+        </div>
+        <!-- Edit Medicine Buttons -->
+        <div class="col-md-2 text-right" style="margin-bottom: 20px">
+          <button class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-left: 0px; margin-right: 5px" id="cancel">Cancel</button>
+          <button class="btn btn-outine-primary hvr-shutter-in-horizontal" style="margin-left: 5px; margin-right: 0px" id="save">Update</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- List All Category Medicines Form -->
+  <div class="categoryMedicineListForm">
+    <div class="form-group col-md-10">
+      <table class="table table-striped" id="categoryMedicineListForm">
+        <thead class="thead-inverse">
+          <tr>
+            <th scope="col">Medicine Name</th>
+            <th scope="col">Alternative Name</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Distributor</th>
+            <th scope="col">Generic</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="tbodyData" id="categoryMedicineList">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </body>
 
 </html>

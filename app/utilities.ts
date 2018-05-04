@@ -11,10 +11,9 @@ export class Utilities {
                 console.log(`\t\tMedicine alt name: ${medicine.altName}`);
                 console.log(`\t\tMedicine manufacturer: ${medicine.manufacturer}`);
                 console.log(`\t\tMedicine distributor: ${medicine.distributor}`);
-                console.log(`\t\tMedicine is generic: ${medicine.generic}`);
+                console.log(`\t\tMedicine is generic: ${medicine.isGeneric}`);
                 console.log("\n");
             });
         });
     };
-
 }

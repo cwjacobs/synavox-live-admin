@@ -19,6 +19,88 @@ export class Database {
     }
 
     hide() {
+        // static getTestCollection(): Array<CategoryDataModel> {
+
+        //     let testCollection: Array<CategoryDataModel> =
+        //         [
+        //             {
+        //                 category: "Cholesterol",
+        //                 medicineList: [
+        //                     {
+        //                         aName: "Atorvastatin",
+        //                         altName: "Lipitor",
+        //                         manufacturer: "MSN Laboratories",
+        //                         distributor: "Cardinal Health",
+        //                         generic: true
+        //                     },
+        //                     {
+        //                         aName: "Rosuvastatin",
+        //                         altName: "Crestor",
+        //                         manufacturer: "MSN Laboratories",
+        //                         distributor: "McKesson",
+        //                         generic: true
+        //                     },
+        //                     {
+        //                         aName: "Lipitor",
+        //                         altName: "Atorvastatin",
+        //                         manufacturer: "Pfizer",
+        //                         distributor: "Cardinal Health",
+        //                         generic: false
+        //                     },
+        //                     {
+        //                         aName: "Crestor",
+        //                         altName: "Rosuvastatin",
+        //                         manufacturer: "AstraZeneca",
+        //                         distributor: "McKesson",
+        //                         generic: false
+        //                     }
+        //                 ],
+        //             },
+        //             {
+        //                 category: "Hypertension",
+        //                 medicineList: [
+        //                     {
+        //                         aName: "Lisinopril",
+        //                         altName: "Prinivil",
+        //                         manufacturer: "Watson Pharmaceuticals",
+        //                         distributor: "Cardinal Health",
+        //                         generic: true
+        //                     },
+        //                     {
+        //                         aName: "Amlodipine",
+        //                         altName: "Norvasc",
+        //                         manufacturer: "MSN Laboratories",
+        //                         distributor: "Cardinal Health",
+        //                         generic: true
+        //                     },
+        //                     {
+        //                         aName: "Benicar",
+        //                         altName: "Olmesartan Medoxomil",
+        //                         manufacturer: "Daiichi Sankyo",
+        //                         distributor: "McKesson",
+        //                         generic: false
+        //                     },
+        //                     {
+        //                         aName: "Losartan",
+        //                         altName: "Cozaar",
+        //                         manufacturer: "Aurobindo Pharma Ltd",
+        //                         distributor: "McKesson",
+        //                         generic: true
+        //                     },
+        //                     {
+        //                         aName: "Carvedilol",
+        //                         altName: "Coreg",
+        //                         manufacturer: "GlaxoSmithKline",
+        //                         distributor: "Cardinal Health",
+        //                         generic: true
+        //                     },
+        //                 ]
+        //             }
+        //         ]
+
+        //     return testCollection;
+        // };
+
         // private static testCollection: CategoryDataModel[] = [
         //     new CategoryDataModel("Cholesterol",
         //         [new MedicineDataModel("Atorvastatin", "Test Data", "Pfizer", "McKesson", true),
@@ -47,90 +129,90 @@ export class Database {
         // ];
     }
 
-    static getTestCollection(): Array<CategoryDataModel> {
+    private static testCollection: Array<CategoryDataModel> =
+        [
+            {
+                category: "Cholesterol",
+                medicineList: [
+                    {
+                        aName: "Atorvastatin",
+                        altName: "Lipitor",
+                        manufacturer: "MSN Laboratories",
+                        distributor: "Cardinal Health",
+                        isGeneric: true
+                    },
+                    {
+                        aName: "Rosuvastatin",
+                        altName: "Crestor",
+                        manufacturer: "MSN Laboratories",
+                        distributor: "McKesson",
+                        isGeneric: true
+                    },
+                    {
+                        aName: "Lipitor",
+                        altName: "Atorvastatin",
+                        manufacturer: "Pfizer",
+                        distributor: "Cardinal Health",
+                        isGeneric: false
+                    },
+                    {
+                        aName: "Crestor",
+                        altName: "Rosuvastatin",
+                        manufacturer: "AstraZeneca",
+                        distributor: "McKesson",
+                        isGeneric: false
+                    }
+                ],
+            },
+            {
+                category: "Hypertension",
+                medicineList: [
+                    {
+                        aName: "Lisinopril",
+                        altName: "Prinivil",
+                        manufacturer: "Watson Pharmaceuticals",
+                        distributor: "Cardinal Health",
+                        isGeneric: true
+                    },
+                    {
+                        aName: "Amlodipine",
+                        altName: "Norvasc",
+                        manufacturer: "MSN Laboratories",
+                        distributor: "Cardinal Health",
+                        isGeneric: true
+                    },
+                    {
+                        aName: "Benicar",
+                        altName: "Olmesartan Medoxomil",
+                        manufacturer: "Daiichi Sankyo",
+                        distributor: "McKesson",
+                        isGeneric: false
+                    },
+                    {
+                        aName: "Losartan",
+                        altName: "Cozaar",
+                        manufacturer: "Aurobindo Pharma Ltd",
+                        distributor: "McKesson",
+                        isGeneric: true
+                    },
+                    {
+                        aName: "Carvedilol",
+                        altName: "Coreg",
+                        manufacturer: "GlaxoSmithKline",
+                        distributor: "Cardinal Health",
+                        isGeneric: true
+                    },
+                ]
+            }
+        ];
 
-        let testCollection: Array<CategoryDataModel> =
-            [
-                {
-                    category: "Cholesterol",
-                    medicineList: [
-                        {
-                            aName: "Atorvastatin",
-                            altName: "Lipitor",
-                            manufacturer: "MSN Laboratories",
-                            distributor: "Cardinal Health",
-                            generic: true
-                        },
-                        {
-                            aName: "Rosuvastatin",
-                            altName: "Crestor",
-                            manufacturer: "MSN Laboratories",
-                            distributor: "McKesson",
-                            generic: true
-                        },
-                        {
-                            aName: "Lipitor",
-                            altName: "Atorvastatin",
-                            manufacturer: "Pfizer",
-                            distributor: "Cardinal Health",
-                            generic: false
-                        },
-                        {
-                            aName: "Crestor",
-                            altName: "Rosuvastatin",
-                            manufacturer: "AstraZeneca",
-                            distributor: "McKesson",
-                            generic: false
-                        }
-                    ],
-                },
-                {
-                    category: "Hypertension",
-                    medicineList: [
-                        {
-                            aName: "Lisinopril",
-                            altName: "Prinivil",
-                            manufacturer: "Watson Pharmaceuticals",
-                            distributor: "Cardinal Health",
-                            generic: true
-                        },
-                        {
-                            aName: "Amlodipine",
-                            altName: "Norvasc",
-                            manufacturer: "MSN Laboratories",
-                            distributor: "Cardinal Health",
-                            generic: true
-                        },
-                        {
-                            aName: "Benicar",
-                            altName: "Olmesartan Medoxomil",
-                            manufacturer: "Daiichi Sankyo",
-                            distributor: "McKesson",
-                            generic: false
-                        },
-                        {
-                            aName: "Losartan",
-                            altName: "Cozaar",
-                            manufacturer: "Aurobindo Pharma Ltd",
-                            distributor: "McKesson",
-                            generic: true
-                        },
-                        {
-                            aName: "Carvedilol",
-                            altName: "Coreg",
-                            manufacturer: "GlaxoSmithKline",
-                            distributor: "Cardinal Health",
-                            generic: true
-                        },
-                    ]
-                }
-            ]
-
-        return testCollection;
-    };
+    public get testCollection(): Array<CategoryDataModel> {
+        return Database.testCollection;
+    }
 
     storeDefaultData(): void {
         console.log("Storing default dataset...");
+        console.log("\n");
 
         const setOptions = {
             merge: true
@@ -138,26 +220,35 @@ export class Database {
 
         let adminCategoriesRef: firebase.firestore.CollectionReference = this.firestore_db.getDatabaseReference("adminCategories");
 
-        adminCategoriesRef.doc("Cholesterol").set({
-            category: "Cholesterol",
-            medicines: [
-                { aName: "Atorvastatin", altName: "Lipitor", manufacturer: "MSN Laboratories", distributor: "Cardinal Health", generic: true },
-                { aName: "Rosuvastatin", altName: "Crestor", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
-                { aName: "Lipitor", altName: "Atorvastatin", manufacturer: "Pfizer", distributor: "Cardinal Health", generic: false },
-                { aName: "Crestor", altName: "Rosuvastatin", manufacturer: "AstraZeneca ", distributor: "McKesson", generic: false },
-            ]
-        }, setOptions);
+        Database.testCollection.forEach(e => {
+            console.log(`Adding Category ${e.category} to Firestore`);
+            
+            adminCategoriesRef.doc(e.category).set({
+                category: e.category,
+                medicines: e.medicineList
+            }, setOptions);
+        });
 
-        adminCategoriesRef.doc("Hypertension").set({
-            category: "Hypertension",
-            medicines: [
-                { aName: "Lisinopril", altName: "Prinivil", manufacturer: "Watson Pharmaceuticals", distributor: "Cardinal Health", generic: true },
-                { aName: "Amlodipine", altName: "Norvasc", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
-                { aName: "Benicar", altName: "Olmesartan Medoxomil", manufacturer: "Daiichi Sankyo", distributor: "Cardinal Health", generic: false },
-                { aName: "Losartan", altName: "Cozaar", manufacturer: "Aurobindo Pharma Ltd ", distributor: "McKesson", generic: true },
-                { aName: "Carvedilol", altName: "Coreg", manufacturer: "GlaxoSmithKline ", distributor: "McKesson", generic: true },
-            ]
-        }, setOptions);
+        // adminCategoriesRef.doc("Cholesterol").set({
+        //     category: "Cholesterol",
+        //     medicines: [
+        //         { aName: "Atorvastatin", altName: "Lipitor", manufacturer: "MSN Laboratories", distributor: "Cardinal Health", generic: true },
+        //         { aName: "Rosuvastatin", altName: "Crestor", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
+        //         { aName: "Lipitor", altName: "Atorvastatin", manufacturer: "Pfizer", distributor: "Cardinal Health", generic: false },
+        //         { aName: "Crestor", altName: "Rosuvastatin", manufacturer: "AstraZeneca ", distributor: "McKesson", generic: false },
+        //     ]
+        // }, setOptions);
+
+        // adminCategoriesRef.doc("Hypertension").set({
+        //     category: "Hypertension",
+        //     medicines: [
+        //         { aName: "Lisinopril", altName: "Prinivil", manufacturer: "Watson Pharmaceuticals", distributor: "Cardinal Health", generic: true },
+        //         { aName: "Amlodipine", altName: "Norvasc", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
+        //         { aName: "Benicar", altName: "Olmesartan Medoxomil", manufacturer: "Daiichi Sankyo", distributor: "Cardinal Health", generic: false },
+        //         { aName: "Losartan", altName: "Cozaar", manufacturer: "Aurobindo Pharma Ltd ", distributor: "McKesson", generic: true },
+        //         { aName: "Carvedilol", altName: "Coreg", manufacturer: "GlaxoSmithKline ", distributor: "McKesson", generic: true },
+        //     ]
+        // }, setOptions);
 
         console.log("...default dataset store complete");
 

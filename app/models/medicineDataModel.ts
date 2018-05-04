@@ -4,13 +4,13 @@ export class MedicineDataModel {
     altName: string;
     manufacturer: string;
     distributor: string;
-    generic: Boolean;
+    isGeneric: Boolean;
 
-    constructor(aName: string, altName: string, manufacturer: string, distributor: string, generic: boolean) {
+    constructor(aName: string, altName: string, manufacturer: string, distributor: string, isGeneric: boolean) {
         this.aName = aName;
         this.altName = altName;
         this.manufacturer = manufacturer;
         this.distributor = distributor;
-        this.generic = generic;
+        this.isGeneric = isGeneric;
     };
 };
