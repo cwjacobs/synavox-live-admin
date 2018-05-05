@@ -7,7 +7,7 @@ import { Utilities } from "./utilities"
 
 $(document).ready(function () {
 
-    $('.editMedicineForm').css("display", "none");
+    $('.medicineEditor').css("display", "none");
 
     // Initialze Application
     //
@@ -36,11 +36,11 @@ $(document).ready(function () {
     });
 
     $('#save').click(function (e) {
-        $('.editMedicineForm').css("display", "none");
+        dashboardController.closeMedicine(e);
     });
 
     $('#cancel').click(function (e) {
-        $('.editMedicineForm').css("display", "none");
+        dashboardController.closeMedicine(e);
     });
 
     $(document).on('click', '#restore-data', function (e) {

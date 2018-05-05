@@ -43,7 +43,7 @@ export class DashboardController {
     };
 
     editMedicine(e: JQuery<HTMLElement>) {
-        $('.editMedicineForm').css("display", "block");
+        $('.medicineEditor').css("display", "block");
         $('#edit-buttons').css("visibility: visible");
 
         //let aName: string = $(e).closest('tr').find("td.aName").text();
@@ -66,7 +66,7 @@ export class DashboardController {
     };
 
     closeMedicine(e: JQuery.Event<HTMLElement, null>) {
-        $('.editMedicineForm').css("display", "none");
+        $('.medicineEditor').css("display", "none");
     };
 
 };

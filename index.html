@@ -170,64 +170,67 @@
     </div>
 
     <!-- Edit Medicine Information -->
-    <div class="editMedicineForm">
-      <div class="form-row"  style="margin-bottom: 20px" id="edit-Medicine">
-        <!-- Edit Medicine Name -->
-        <div class="col-md-2">
-          <label for="aName">Medicine Name</label>
-          <input type="text" class="col-md-12" id="aName-edit" placeholder="Medicine Name">
+    <div style="border: 1px; border-color: black; border-style: solid" class="medicineEditor">
+      <div class="editMedicineForm" style="padding: 10px">
+        <h4>Medicine Editor:</h4>
+        <div class="form-row" style="margin-bottom: 20px" id="edit-Medicine">
+          <!-- Edit Medicine Name -->
+          <div class="col-md-2">
+            <label for="aName">Medicine Name</label>
+            <input type="text" class="col-md-12" id="aName-edit" placeholder="Medicine Name">
+          </div>
+          <!-- Edit Medicine Alternative Name -->
+          <div class="col-md-2">
+            <label for="altName">Alternative Name</label>
+            <input type="text" class="col-md-12" id="altName-edit" placeholder="Also known as...">
+          </div>
+          <!-- Edit Medicine Manufacturer -->
+          <div class="col-md-3">
+            <label for="manufacturer">Manufacturer</label>
+            <input type="text" class="col-md-12" id="manufacturer-edit" placeholder="Manufacturer">
+          </div>
+          <!-- Edit Medicine Distributor -->
+          <div class="col-md-3">
+            <label for="distributor">Distributor</label>
+            <input type="text" class="col-md-12" id="distributor-edit" placeholder="Distributor">
+          </div>
         </div>
-        <!-- Edit Medicine Alternative Name -->
-        <div class="col-md-2">
-          <label for="altName">Alternative Name</label>
-          <input type="text" class="col-md-12" id="altName-edit" placeholder="Also known as...">
-        </div>
-        <!-- Edit Medicine Manufacturer -->
-        <div class="col-md-3">
-          <label for="manufacturer">Manufacturer</label>
-          <input type="text" class="col-md-12" id="manufacturer-edit" placeholder="Manufacturer">
-        </div>
-        <!-- Edit Medicine Distributor -->
-        <div class="col-md-3">
-          <label for="distributor">Distributor</label>
-          <input type="text" class="col-md-12" id="distributor-edit" placeholder="Distributor">
+        <div class="form-row">
+          <!-- Is Generic Checkbox -->
+          <div class="form-check col-md-8">
+            <label class="form-check-label" for="isGeneric-edit">
+              <input class="form-check-input" type="checkbox" id="isGeneric-edit"> Check this if this is a generic medication.
+            </label>
+          </div>
+          <!-- Edit Medicine Buttons -->
+          <div class="col-md-2 text-right" style="margin-bottom: 20px">
+            <button class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-left: 0px; margin-right: 5px" id="cancel">Cancel</button>
+            <button class="btn btn-outine-primary hvr-shutter-in-horizontal" style="margin-left: 5px; margin-right: 0px" id="save">Update</button>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <!-- Is Generic Checkbox -->
-        <div class="form-check col-md-8">
-          <label class="form-check-label" for="isGeneric-edit">
-            <input class="form-check-input" type="checkbox" id="isGeneric-edit"> Check this if this is a generic medication.
-          </label>
-        </div>
-        <!-- Edit Medicine Buttons -->
-        <div class="col-md-2 text-right" style="margin-bottom: 20px">
-          <button class="btn btn-outline-danger hvr-shutter-in-horizontal" style="margin-left: 0px; margin-right: 5px" id="cancel">Cancel</button>
-          <button class="btn btn-outine-primary hvr-shutter-in-horizontal" style="margin-left: 5px; margin-right: 0px" id="save">Update</button>
-        </div>
     </div>
-  </div>
 
-  <!-- List All Category Medicines Form -->
-  <div class="categoryMedicineListForm">
-    <div class="form-group col-md-10">
-      <table class="table table-striped" id="categoryMedicineListForm">
-        <thead class="thead-inverse">
-          <tr>
-            <th scope="col">Medicine Name</th>
-            <th scope="col">Alternative Name</th>
-            <th scope="col">Manufacturer</th>
-            <th scope="col">Distributor</th>
-            <th scope="col">Generic</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody class="tbodyData" id="categoryMedicineList">
-        </tbody>
-      </table>
+    <!-- List All Category Medicines Form -->
+    <div class="categoryMedicineListForm">
+      <div class="form-group col-md-10">
+        <table class="table table-striped" id="categoryMedicineListForm">
+          <thead class="thead-inverse">
+            <tr>
+              <th scope="col">Medicine Name</th>
+              <th scope="col">Alternative Name</th>
+              <th scope="col">Manufacturer</th>
+              <th scope="col">Distributor</th>
+              <th scope="col">Generic</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody class="tbodyData" id="categoryMedicineList">
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
 </body>
 
