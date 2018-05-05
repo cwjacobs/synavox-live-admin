@@ -1,5 +1,6 @@
 import { Database } from "../database/database"
 import { CategoryDataModel } from "../models/categoryDataModel";
+import { MedicineDataModel } from "../models/medicineDataModel";
 
 export class DashboardController {
 
@@ -23,11 +24,11 @@ export class DashboardController {
                 let tableRow: string = "";
                 e.medicineList.forEach(medicine => {
                     tableRow += '<tr>';
-                    tableRow += '<td class="aName">' + medicine.aName + '</td>';
+                    tableRow += '<td class="aName" id="id-aName">' + medicine.aName + '</td>';
                     tableRow += '<td class="altName">' + medicine.altName + '</td>';
                     tableRow += '<td class="manufacturer">' + medicine.manufacturer + '</td>';
                     tableRow += '<td class="distributor">' + medicine.distributor + '</td>';
-                    tableRow += '<td class="isGenertic">' + medicine.isGeneric + '</td>';
+                    tableRow += '<td class="isGeneric">' + medicine.isGeneric + '</td>';
                     tableRow += '<td class="edit-medicine"><i class="fa fa-pencil" areia-hidden="true" style="color: green"></td>';
                     tableRow += '<td class="delete-medicine"><i class="fa fa-trash" areia-hidden="true" style="color: red"></td>';
                 });
@@ -41,15 +42,27 @@ export class DashboardController {
         }
     };
 
-    editMedicine(e: JQuery.Event<HTMLElement, null>) {
+    editMedicine(e: JQuery<HTMLElement>) {
         $('.editMedicineForm').css("display", "block");
         $('#edit-buttons').css("visibility: visible");
 
-        $("#aName").val($(this).closest('tr').find('.aName').text());
-        $("#altName").val($(this).closest('tr').find('.altName').text());
-        $("#manufacturer").val($(this).closest('tr').find('.manufacturer').text());
-        $("#distributor").val($(this).closest('tr').find('.distributor').text());
-        $("#isGeneric").val($(this).closest('tr').find('.isGeneric').text());
+        //let aName: string = $(e).closest('tr').find("td.aName").text();
+        //$("#aName-edit").text(aName);
+
+        $("#aName-edit").val($(e).closest('tr').find("td.aName").text());
+        $("#altName-edit").val($(e).closest('tr').find("td.altName").text());
+        $("#manufacturer-edit").val($(e).closest('tr').find("td.manufacturer").text());
+        $("#distributor-edit").val($(e).closest('tr').find("td.distributor").text());
+
+        //$("#isGeneric-edit").val($(e).closest('tr').find("td.isGeneric").text());
+
+        let isGeneric: string = $(e).closest('tr').find("td.isGeneric").text();
+        if(isGeneric === "true") {
+            $("#isGeneric-edit").prop("checked", true);
+        }
+        else {
+            $("#isGeneric-edit").prop("checked", false);
+        }
     };
 
     closeMedicine(e: JQuery.Event<HTMLElement, null>) {

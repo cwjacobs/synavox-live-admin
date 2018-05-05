@@ -22,16 +22,13 @@ $(document).ready(function () {
 
         // Display list of selected category medicines
         let selectedCategory: string = $(this).find('option:selected').text();
+
         dashboardController.selectCategoryAsync(selectedCategory);
     });
 
-    // $(document).on('click', '.edit-medicine', function (e) {
-    //     alert("document");
-    //     //dashboardController.editMedicine(e);
-    // });
-
     $("tbody.tbodyData").on("click", "td.edit-medicine", function (e) {
-        dashboardController.editMedicine(e);
+        let selectedMedicine: string = $(this).closest("tr").find("td.aName").text();
+        dashboardController.editMedicine($(this));
     });
 
     $("tbody.tbodyData").on("click", "td.delete-medicine", function (e) {
