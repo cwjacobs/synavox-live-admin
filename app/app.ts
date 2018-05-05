@@ -1,7 +1,7 @@
-﻿import { DashboardController } from "./controllers/dashboardController"
+﻿import { DashboardController } from "./controllers/dashboardController";
 import { Database } from "./database/database";
 import { CategoryDataModel } from "./models/CategoryDataModel";
-import { Utilities } from "./utilities"
+import { Utilities } from "./utilities";
 
 /// <reference path ="../node_modules/@types/jquery/index.d.ts"/>
 

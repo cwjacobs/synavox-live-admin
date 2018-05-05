@@ -1,6 +1,5 @@
-import { Database } from "../database/database"
+import { Database } from "../database/database";
 import { CategoryDataModel } from "../models/categoryDataModel";
-import { MedicineDataModel } from "../models/medicineDataModel";
 
 export class DashboardController {
 
@@ -46,15 +45,10 @@ export class DashboardController {
         $('.medicineEditor').css("display", "block");
         $('#edit-buttons').css("visibility: visible");
 
-        //let aName: string = $(e).closest('tr').find("td.aName").text();
-        //$("#aName-edit").text(aName);
-
         $("#aName-edit").val($(e).closest('tr').find("td.aName").text());
         $("#altName-edit").val($(e).closest('tr').find("td.altName").text());
         $("#manufacturer-edit").val($(e).closest('tr').find("td.manufacturer").text());
         $("#distributor-edit").val($(e).closest('tr').find("td.distributor").text());
-
-        //$("#isGeneric-edit").val($(e).closest('tr').find("td.isGeneric").text());
 
         let isGeneric: string = $(e).closest('tr').find("td.isGeneric").text();
         if(isGeneric === "true") {
