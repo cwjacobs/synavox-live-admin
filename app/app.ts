@@ -19,6 +19,8 @@ $(document).ready(function () {
     $(document).on('change', '#category-selector', function (e) {
         // Remove the initial 'Select Category...' option from the dropdown
         $('#category-greeting').remove();
+        
+        dashboardController.closeMedicine(e);
 
         // Display list of selected category medicines
         let selectedCategory: string = $(this).find('option:selected').text();
