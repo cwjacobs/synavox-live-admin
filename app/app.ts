@@ -7,7 +7,7 @@ import { Utilities } from "./utilities";
 
 $(document).ready(function () {
 
-    $('.medicineEditor').css("display", "none");
+    //$('.medicineEditor').css("display", "none");
 
     // Initialze Application
     //
@@ -38,7 +38,7 @@ $(document).ready(function () {
     });
 
     $('#save').click(function (e) {
-        dashboardController.closeMedicine(e);
+        dashboardController.updateMedicine(e);
     });
 
     $('#cancel').click(function (e) {

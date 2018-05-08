@@ -2,20 +2,22 @@ import { FirestoreConfig } from "./firebaseConfigs"
 import { SynavoxFirestore } from "./synavoxFirestore"
 import { CategoryDataModel } from "../models/CategoryDataModel"
 import { MedicineDataModel } from "../models/medicineDataModel";
+import { Utilities } from "../utilities";
 
 // Import Firebase / Firestore definitions
 //
 import * as firebase from 'firebase'
 import 'firebase/firestore'
+import { Server } from "tls";
 
 export class Database {
 
-    firestore_db: SynavoxFirestore;
-    firestore_dbConfig: FirestoreConfig;
+    firestore: SynavoxFirestore;
+    firestoreConfig: FirestoreConfig;
 
     constructor() {
-        this.firestore_db = new SynavoxFirestore();
-        this.firestore_dbConfig = new FirestoreConfig();
+        this.firestore = new SynavoxFirestore();
+        this.firestoreConfig = new FirestoreConfig();
     }
 
     hide() {
@@ -27,28 +29,28 @@ export class Database {
         //                 category: "Cholesterol",
         //                 medicineList: [
         //                     {
-        //                         aName: "Atorvastatin",
+        //                         name: "Atorvastatin",
         //                         altName: "Lipitor",
         //                         manufacturer: "MSN Laboratories",
         //                         distributor: "Cardinal Health",
         //                         generic: true
         //                     },
         //                     {
-        //                         aName: "Rosuvastatin",
+        //                         name: "Rosuvastatin",
         //                         altName: "Crestor",
         //                         manufacturer: "MSN Laboratories",
         //                         distributor: "McKesson",
         //                         generic: true
         //                     },
         //                     {
-        //                         aName: "Lipitor",
+        //                         name: "Lipitor",
         //                         altName: "Atorvastatin",
         //                         manufacturer: "Pfizer",
         //                         distributor: "Cardinal Health",
         //                         generic: false
         //                     },
         //                     {
-        //                         aName: "Crestor",
+        //                         name: "Crestor",
         //                         altName: "Rosuvastatin",
         //                         manufacturer: "AstraZeneca",
         //                         distributor: "McKesson",
@@ -60,35 +62,35 @@ export class Database {
         //                 category: "Hypertension",
         //                 medicineList: [
         //                     {
-        //                         aName: "Lisinopril",
+        //                         name: "Lisinopril",
         //                         altName: "Prinivil",
         //                         manufacturer: "Watson Pharmaceuticals",
         //                         distributor: "Cardinal Health",
         //                         generic: true
         //                     },
         //                     {
-        //                         aName: "Amlodipine",
+        //                         name: "Amlodipine",
         //                         altName: "Norvasc",
         //                         manufacturer: "MSN Laboratories",
         //                         distributor: "Cardinal Health",
         //                         generic: true
         //                     },
         //                     {
-        //                         aName: "Benicar",
+        //                         name: "Benicar",
         //                         altName: "Olmesartan Medoxomil",
         //                         manufacturer: "Daiichi Sankyo",
         //                         distributor: "McKesson",
         //                         generic: false
         //                     },
         //                     {
-        //                         aName: "Losartan",
+        //                         name: "Losartan",
         //                         altName: "Cozaar",
         //                         manufacturer: "Aurobindo Pharma Ltd",
         //                         distributor: "McKesson",
         //                         generic: true
         //                     },
         //                     {
-        //                         aName: "Carvedilol",
+        //                         name: "Carvedilol",
         //                         altName: "Coreg",
         //                         manufacturer: "GlaxoSmithKline",
         //                         distributor: "Cardinal Health",
@@ -135,28 +137,28 @@ export class Database {
                 category: "Cholesterol",
                 medicineList: [
                     {
-                        aName: "Atorvastatin",
+                        name: "Atorvastatin",
                         altName: "Lipitor",
                         manufacturer: "MSN Laboratories",
                         distributor: "Cardinal Health",
                         isGeneric: true
                     },
                     {
-                        aName: "Rosuvastatin",
+                        name: "Rosuvastatin",
                         altName: "Crestor",
                         manufacturer: "MSN Laboratories",
                         distributor: "McKesson",
                         isGeneric: true
                     },
                     {
-                        aName: "Lipitor",
+                        name: "Lipitor",
                         altName: "Atorvastatin",
                         manufacturer: "Pfizer",
                         distributor: "Cardinal Health",
                         isGeneric: false
                     },
                     {
-                        aName: "Crestor",
+                        name: "Crestor",
                         altName: "Rosuvastatin",
                         manufacturer: "AstraZeneca",
                         distributor: "McKesson",
@@ -168,35 +170,35 @@ export class Database {
                 category: "Hypertension",
                 medicineList: [
                     {
-                        aName: "Lisinopril",
+                        name: "Lisinopril",
                         altName: "Prinivil",
                         manufacturer: "Watson Pharmaceuticals",
                         distributor: "Cardinal Health",
                         isGeneric: true
                     },
                     {
-                        aName: "Amlodipine",
+                        name: "Amlodipine",
                         altName: "Norvasc",
                         manufacturer: "MSN Laboratories",
                         distributor: "Cardinal Health",
                         isGeneric: true
                     },
                     {
-                        aName: "Benicar",
+                        name: "Benicar",
                         altName: "Olmesartan Medoxomil",
                         manufacturer: "Daiichi Sankyo",
                         distributor: "McKesson",
                         isGeneric: false
                     },
                     {
-                        aName: "Losartan",
+                        name: "Losartan",
                         altName: "Cozaar",
                         manufacturer: "Aurobindo Pharma Ltd",
                         distributor: "McKesson",
                         isGeneric: true
                     },
                     {
-                        aName: "Carvedilol",
+                        name: "Carvedilol",
                         altName: "Coreg",
                         manufacturer: "GlaxoSmithKline",
                         distributor: "Cardinal Health",
@@ -210,6 +212,63 @@ export class Database {
         return Database.testCollection;
     }
 
+    private createCategoryMap(): Map<string, CategoryDataModel> {
+        let map: Map<string, CategoryDataModel> = new Map<string, CategoryDataModel>();
+        let collection = Database.testCollection;
+
+        collection.forEach(e => {
+            map.set(e.category, e);
+        });
+        return map;
+    }
+
+    private createMedicineMap(): Map<string, MedicineDataModel> {
+        let map: Map<string, MedicineDataModel> = new Map<string, MedicineDataModel>();
+        let collection = Database.testCollection;
+
+        collection.forEach(e => {
+            e.medicineList.forEach(m => {
+                map.set(m.name, m);
+            })
+        });
+        return map;
+    }
+
+    public findCategory(category: string, map: Map<string, CategoryDataModel>): CategoryDataModel {
+        let result: CategoryDataModel;
+        let collection = Database.testCollection;
+
+        let categoryModel: CategoryDataModel | undefined = map.get(category);
+
+        if (categoryModel !== undefined) {
+            return categoryModel;
+        }
+        else {
+            throw ("categoryModel is undefined");
+        }
+    }
+
+    public findMedacine(medicine: string, map: Map<string, MedicineDataModel>): MedicineDataModel {
+        let medicineDataModel = map.get(medicine);
+        if (medicineDataModel !== undefined) {
+            return medicineDataModel;
+        }
+        else {
+            throw ("Nope!");
+        }
+    }
+
+    getMedicineDataModelProperties(dataModel: MedicineDataModel): any {
+
+        let properties: any = {
+            altName: dataModel.altName,
+            manufacturer: dataModel.manufacturer,
+            distributor: dataModel.distributor,
+            isGeneric: dataModel.isGeneric
+        }
+        return properties;
+    }
+
     storeDefaultData(): void {
         console.log("Storing default dataset...");
         console.log("\n");
@@ -218,37 +277,17 @@ export class Database {
             merge: true
         };
 
-        let adminCategoriesRef: firebase.firestore.CollectionReference = this.firestore_db.getDatabaseReference("adminCategories");
+        let adminCategoriesRef: firebase.firestore.CollectionReference = this.firestore.getCollectionReference("adminCategories");
 
         Database.testCollection.forEach(e => {
             console.log(`Adding Category ${e.category} to Firestore`);
-            
-            adminCategoriesRef.doc(e.category).set({
-                category: e.category,
-                medicines: e.medicineList
-            }, setOptions);
+
+            let medicineList: Array<MedicineDataModel> = e.medicineList;
+            medicineList.forEach(medicine => {
+                let properties = this.getMedicineDataModelProperties(medicine);
+                adminCategoriesRef.doc(e.category).collection("Medicines").doc(medicine.name).set({ properties }, setOptions);
+            })
         });
-
-        // adminCategoriesRef.doc("Cholesterol").set({
-        //     category: "Cholesterol",
-        //     medicines: [
-        //         { aName: "Atorvastatin", altName: "Lipitor", manufacturer: "MSN Laboratories", distributor: "Cardinal Health", generic: true },
-        //         { aName: "Rosuvastatin", altName: "Crestor", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
-        //         { aName: "Lipitor", altName: "Atorvastatin", manufacturer: "Pfizer", distributor: "Cardinal Health", generic: false },
-        //         { aName: "Crestor", altName: "Rosuvastatin", manufacturer: "AstraZeneca ", distributor: "McKesson", generic: false },
-        //     ]
-        // }, setOptions);
-
-        // adminCategoriesRef.doc("Hypertension").set({
-        //     category: "Hypertension",
-        //     medicines: [
-        //         { aName: "Lisinopril", altName: "Prinivil", manufacturer: "Watson Pharmaceuticals", distributor: "Cardinal Health", generic: true },
-        //         { aName: "Amlodipine", altName: "Norvasc", manufacturer: "MSN Laboratories", distributor: "McKesson", generic: true },
-        //         { aName: "Benicar", altName: "Olmesartan Medoxomil", manufacturer: "Daiichi Sankyo", distributor: "Cardinal Health", generic: false },
-        //         { aName: "Losartan", altName: "Cozaar", manufacturer: "Aurobindo Pharma Ltd ", distributor: "McKesson", generic: true },
-        //         { aName: "Carvedilol", altName: "Coreg", manufacturer: "GlaxoSmithKline ", distributor: "McKesson", generic: true },
-        //     ]
-        // }, setOptions);
 
         console.log("...default dataset store complete");
 
@@ -256,23 +295,74 @@ export class Database {
     };
 
     initialize(configurationName: string) {
-        this.firestore_db.initialize(configurationName);
+        this.firestore.initialize(configurationName);
     }
 
     // Gets every medication in the db, might need to add functionality as db grows
     //
     async getRemoteMedicineCollectionAsync(): Promise<Array<CategoryDataModel>> {
-        let medicineCollection: Array<CategoryDataModel> = new Array<CategoryDataModel>();
+    // async getRemoteMedicineCollectionAsync(): Promise<CategoryDataModel> {
+        let self: any = this;
+        // let medicineCollection: Array<MedicineDataModel> = new Array<MedicineDataModel>();
 
-        let querySnapshot: any = await this.getRemoteCollection("adminCategories");
-        //let querySnapshot: any = await this.getRemoteCollection("medicineCategories");
         return new Promise<Array<CategoryDataModel>>(function (resolve) {
-            querySnapshot.forEach((doc: any) => {
-                let medicineCategory: CategoryDataModel = new CategoryDataModel(doc.get("category"), doc.get("medicines"));
-                medicineCollection.push(medicineCategory);
-            });
-            resolve(medicineCollection);
+            let medicineCollection: Array<MedicineDataModel> = new Array<MedicineDataModel>();
+
+            let medicineCategoriesRef: firebase.firestore.CollectionReference = self.firestore.getCollectionReference("adminCategories");
+            medicineCategoriesRef.doc("Hypertension").collection("Medicines").get().then((querySnapShot => {
+                let x = 0;
+                querySnapShot.forEach(doc => {
+                    let altName: string = doc.get("altName");
+                    let manufacturer: string = doc.get("manufacturer");
+                    let distributor: string = doc.get("distributor");
+                    let mdm = new MedicineDataModel(doc.id, altName, manufacturer, distributor, true );
+                    medicineCollection.push(mdm);
+                    console.log(doc.id, " => ", doc.data());
+                });
+                let cdm = new CategoryDataModel("Hypertension", medicineCollection);
+                let cdmArray: Array<CategoryDataModel> = new Array<CategoryDataModel>();
+                cdmArray.push(cdm);
+                resolve(cdmArray);
+            }));
+            // resolve(Database.testCollection);
+            //resolve(medicineCollection);
         });
+
+
+        // db.collection("transactions").doc("2018-01-02").collection("education-1").get()
+        //     .then(function (querySnapshot) {
+
+        // this.firestore.db.collection("adminCategories:").doc("Hypertension").collection("Medicines").get()
+        //     .then(function (querySnapshot) {
+        //         querySnapshot.forEach(doc => {
+        //             console.log("Medicines", doc.id, " => ", doc.data());
+        //         })
+        //     });
+
+        // this.firestore.db.collection("adminCategories").get()
+        //     .then(function (querySnapshot) {
+        //         querySnapshot.forEach(doc => {
+        //             console.log("adminCategories:", doc.id, " => ", doc.data());
+        //         })
+        //     });
+
+        // collectionRef.get().then((querySnapshot: any) => {
+        //     resolve(querySnapshot);
+        // });
+
+
+        //let querySnapshot: any = await this.getRemoteCollection("adminCategories");
+
+        //let querySnapshot: any = await this.getRemoteCollection("medicineCategories");
+
+        // return new Promise<Array<CategoryDataModel>>(function (resolve) {
+        // querySnapshot.forEach((doc: any) => {
+        //     let medicineCategory: CategoryDataModel = new CategoryDataModel(doc.get("category"), doc.collection("Medicines"));
+        //     medicineCollection.push(medicineCategory);
+        // });
+        // resolve(Database.testCollection);
+        //resolve(medicineCollection);
+        // });
     };
 
     // Gets Collection specified by requestedCollection
@@ -280,7 +370,7 @@ export class Database {
     private getRemoteCollection(requestedCollection: string): Promise<any> {
         let self: Database = this;
         return new Promise<any>(function (resolve) {
-            let collectionRef: firebase.firestore.CollectionReference = self.firestore_db.getDatabaseReference(requestedCollection);
+            let collectionRef: firebase.firestore.CollectionReference = self.firestore.getCollectionReference(requestedCollection);
             collectionRef.get().then((querySnapshot: any) => {
                 resolve(querySnapshot);
             });

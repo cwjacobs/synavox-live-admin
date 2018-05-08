@@ -9,7 +9,7 @@ export class SynavoxFirestore {
 
     config: FirestoreConfig;
     mainApp: firebase.app.App;
-    firestore: firebase.firestore.Firestore;
+    db: firebase.firestore.Firestore;
 
     static settings = { timestampsInSnapshots: true };
 
@@ -24,10 +24,12 @@ export class SynavoxFirestore {
 
         firebase.firestore(this.mainApp).settings(SynavoxFirestore.settings);
 
+        this.db = firebase.firestore(this.mainApp);
+
         console.log(`Firebase app name: ${this.mainApp.name}`);
     };
 
-    getDatabaseReference(requestedCollection: string): firebase.firestore.CollectionReference {
+    getCollectionReference(requestedCollection: string): firebase.firestore.CollectionReference {
         let requestedCollectionRef: firebase.firestore.CollectionReference = firebase.firestore(this.mainApp).collection(requestedCollection);
         return requestedCollectionRef;
     };
