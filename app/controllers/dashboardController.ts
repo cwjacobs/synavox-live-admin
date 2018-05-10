@@ -1,5 +1,6 @@
 import { Database } from "../database/database";
 import { CategoryDataModel } from "../models/categoryDataModel";
+import { MedicineDataModel } from "../models/medicineDataModel";
 
 export class DashboardController {
 
@@ -57,20 +58,32 @@ export class DashboardController {
     };
 
     updateMedicine(e: JQuery.Event<HTMLElement, null>) {
+        
+        let category: string = $("#category-selector").find('option:selected').text();
+
+        let name: any = $("#edit-name").val();
+        let altName: any = $("#edit-altName").val();
+        let manufacturer: any = $("#edit-manufacturer").val();
+        let distributor: any = $("#edit-distributor").val();
+        let isGeneric = $("#edit-isGeneric").prop("checked");
 
         let tableRowSelector: any = "td#" + $("#edit-name").val();
 
         let tableRowElement: any = $(tableRowSelector);
 
-        tableRowElement.closest('tr').find("td.altName").text($("#edit-altName").val());
+        //tableRowElement.closest('tr').find("td.altName").text($("#edit-altName").val());
+        
+        tableRowElement.closest('tr').find("td.altName").text(altName);
 
-        tableRowElement.closest('tr').find("td.manufacturer").text($("#edit-manufacturer").val());
+        tableRowElement.closest('tr').find("td.manufacturer").text(manufacturer);
 
-        tableRowElement.closest('tr').find("td.distributor").text($("#edit-distributor").val());
-
-        let isGeneric = $("#edit-isGeneric").prop("checked");
+        tableRowElement.closest('tr').find("td.distributor").text(distributor);
 
         tableRowElement.closest('tr').find("td.isGeneric").text(isGeneric);
+
+        let medicine: MedicineDataModel = new MedicineDataModel(name, altName, manufacturer, distributor, isGeneric);
+
+        this.database.storeMedicineData(category, medicine);
 
         $('.medicineEditor').css("display", "none");
     }

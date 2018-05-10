@@ -342,4 +342,25 @@ export class Database {
             });
         });
     };
+
+    storeMedicineData(category: string, medicine: MedicineDataModel): void {
+        console.log("Storing medicine data to Firestore...");
+        console.log("\n");
+
+        const setOptions = {
+            merge: true
+        };
+
+        let adminCategoriesRef: firebase.firestore.CollectionReference = this.firestore.getCollectionReference("adminCategories");
+
+        console.log(`Storing medicine ${medicine.name} to Firestore`);
+
+        let information = this.getMedicineInformation(medicine);
+        adminCategoriesRef.doc(category).collection("Medicines").doc(medicine.name).set({ information }, setOptions);
+
+        console.log("...medicine store complete");
+
+        return;
+    };
+
 };
