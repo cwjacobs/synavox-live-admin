@@ -72,9 +72,7 @@ export class DashboardController {
 
         tableRowElement.closest('tr').find("td.isGeneric").text(isGeneric);
 
-        $('.medicineEditor').css("display", "block");
-
-        $('#edit-buttons').css("visibility: visible");
+        $('.medicineEditor').css("display", "none");
     }
 
     closeMedicine(e: JQuery.Event<HTMLElement, null>) {

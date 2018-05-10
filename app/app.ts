@@ -7,7 +7,7 @@ import { Utilities } from "./utilities";
 
 $(document).ready(function () {
 
-    //$('.medicineEditor').css("display", "none");
+    $('.medicineEditor').css("display", "none");
 
     // Initialze Application
     //
