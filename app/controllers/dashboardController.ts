@@ -10,10 +10,12 @@ export class DashboardController {
     constructor(private database: Database) {
     }
 
-    async selectCategoryAsync(category: string) {
+    async selectCategoryAsync() {
 
         $('#categoryMedicineList').fadeOut();
         let categoryFound: boolean = false;
+
+        let category: string = $("#category-selector").find('option:selected').text();
 
         let self = this; // required for 'this' dereference in async loop after await
         self.medicineCollection = await this.database.getRemoteMedicineCategoryAsync(category);
@@ -71,8 +73,6 @@ export class DashboardController {
 
         let tableRowElement: any = $(tableRowSelector);
 
-        //tableRowElement.closest('tr').find("td.altName").text($("#edit-altName").val());
-        
         tableRowElement.closest('tr').find("td.altName").text(altName);
 
         tableRowElement.closest('tr').find("td.manufacturer").text(manufacturer);

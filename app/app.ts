@@ -23,9 +23,9 @@ $(document).ready(function () {
         dashboardController.closeMedicine(e);
 
         // Display list of selected category medicines
-        let selectedCategory: string = $(this).find('option:selected').text();
+        //let selectedCategory: string = $(this).find('option:selected').text();
 
-        dashboardController.selectCategoryAsync(selectedCategory);
+        dashboardController.selectCategoryAsync();
     });
 
     $("tbody.tbodyData").on("click", "td.edit-medicine", function (e) {
