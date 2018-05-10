@@ -258,15 +258,15 @@ export class Database {
         }
     }
 
-    getMedicineDataModelProperties(dataModel: MedicineDataModel): any {
+    getMedicineInformation(medicine: MedicineDataModel): any {
 
-        let properties: any = {
-            altName: dataModel.altName,
-            manufacturer: dataModel.manufacturer,
-            distributor: dataModel.distributor,
-            isGeneric: dataModel.isGeneric
+        let information: any = {
+            altName: medicine.altName,
+            manufacturer: medicine.manufacturer,
+            distributor: medicine.distributor,
+            isGeneric: medicine.isGeneric
         }
-        return properties;
+        return information;
     }
 
     storeDefaultData(): void {
@@ -284,8 +284,8 @@ export class Database {
 
             let medicineList: Array<MedicineDataModel> = e.medicineList;
             medicineList.forEach(medicine => {
-                let properties = this.getMedicineDataModelProperties(medicine);
-                adminCategoriesRef.doc(e.category).collection("Medicines").doc(medicine.name).set({ properties }, setOptions);
+                let information = this.getMedicineInformation(medicine);
+                adminCategoriesRef.doc(e.category).collection("Medicines").doc(medicine.name).set({ information }, setOptions);
             })
         });
 
@@ -298,71 +298,37 @@ export class Database {
         this.firestore.initialize(configurationName);
     }
 
+    getMedicineDataModel(name: string, medFields: any): MedicineDataModel {
+        let altName: string = medFields.information.altName;
+        let manufacturer: string = medFields.information.manufacturer;
+        let distributor: string = medFields.information.distributor;
+        let isGeneric: boolean = medFields.information.isGeneric
+
+        let medicineDataModel = new MedicineDataModel(name, altName, manufacturer, distributor, isGeneric);
+
+        return medicineDataModel;
+    }
+
     // Gets every medication in the db, might need to add functionality as db grows
     //
-    async getRemoteMedicineCollectionAsync(): Promise<Array<CategoryDataModel>> {
-    // async getRemoteMedicineCollectionAsync(): Promise<CategoryDataModel> {
+    async getRemoteMedicineCategoryAsync(category: string): Promise<Array<CategoryDataModel>> {
         let self: any = this;
-        // let medicineCollection: Array<MedicineDataModel> = new Array<MedicineDataModel>();
 
         return new Promise<Array<CategoryDataModel>>(function (resolve) {
             let medicineCollection: Array<MedicineDataModel> = new Array<MedicineDataModel>();
 
             let medicineCategoriesRef: firebase.firestore.CollectionReference = self.firestore.getCollectionReference("adminCategories");
-            medicineCategoriesRef.doc("Hypertension").collection("Medicines").get().then((querySnapShot => {
-                let x = 0;
+            medicineCategoriesRef.doc(category).collection("Medicines").get().then((querySnapShot => {
                 querySnapShot.forEach(doc => {
-                    let altName: string = doc.get("altName");
-                    let manufacturer: string = doc.get("manufacturer");
-                    let distributor: string = doc.get("distributor");
-                    let mdm = new MedicineDataModel(doc.id, altName, manufacturer, distributor, true );
+                    let mdm = self.getMedicineDataModel(doc.id, doc.data());
                     medicineCollection.push(mdm);
-                    console.log(doc.id, " => ", doc.data());
                 });
-                let cdm = new CategoryDataModel("Hypertension", medicineCollection);
+                let cdm = new CategoryDataModel(category, medicineCollection);
                 let cdmArray: Array<CategoryDataModel> = new Array<CategoryDataModel>();
                 cdmArray.push(cdm);
                 resolve(cdmArray);
             }));
-            // resolve(Database.testCollection);
-            //resolve(medicineCollection);
         });
-
-
-        // db.collection("transactions").doc("2018-01-02").collection("education-1").get()
-        //     .then(function (querySnapshot) {
-
-        // this.firestore.db.collection("adminCategories:").doc("Hypertension").collection("Medicines").get()
-        //     .then(function (querySnapshot) {
-        //         querySnapshot.forEach(doc => {
-        //             console.log("Medicines", doc.id, " => ", doc.data());
-        //         })
-        //     });
-
-        // this.firestore.db.collection("adminCategories").get()
-        //     .then(function (querySnapshot) {
-        //         querySnapshot.forEach(doc => {
-        //             console.log("adminCategories:", doc.id, " => ", doc.data());
-        //         })
-        //     });
-
-        // collectionRef.get().then((querySnapshot: any) => {
-        //     resolve(querySnapshot);
-        // });
-
-
-        //let querySnapshot: any = await this.getRemoteCollection("adminCategories");
-
-        //let querySnapshot: any = await this.getRemoteCollection("medicineCategories");
-
-        // return new Promise<Array<CategoryDataModel>>(function (resolve) {
-        // querySnapshot.forEach((doc: any) => {
-        //     let medicineCategory: CategoryDataModel = new CategoryDataModel(doc.get("category"), doc.collection("Medicines"));
-        //     medicineCollection.push(medicineCategory);
-        // });
-        // resolve(Database.testCollection);
-        //resolve(medicineCollection);
-        // });
     };
 
     // Gets Collection specified by requestedCollection
