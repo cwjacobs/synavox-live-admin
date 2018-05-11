@@ -9,6 +9,8 @@ $(document).ready(function () {
 
     $('.medicineEditor').css("display", "none");
 
+    $('.addCategoryMedicineListForm').css("display", "none");
+
     // Initialze Application
     //
     let database: Database = new Database();
@@ -16,35 +18,61 @@ $(document).ready(function () {
 
     let dashboardController = new DashboardController(database);
 
+    // Select Category Handlers
+    // ------------------------
     $(document).on('change', '#category-selector', function (e) {
         // Remove the initial 'Select Category...' option from the dropdown
         $('#category-greeting').remove();
-        
-        dashboardController.closeMedicine(e);
 
-        // Display list of selected category medicines
-        //let selectedCategory: string = $(this).find('option:selected').text();
+        dashboardController.closeMedicineEditor(e);
+
+        dashboardController.closeCategoryEditor(e);
 
         dashboardController.selectCategoryAsync();
     });
 
+
+    // Edit Medcine Handlers
+    // ---------------------
     $("tbody.tbodyData").on("click", "td.edit-medicine", function (e) {
+        dashboardController.closeCategoryEditor(e);
+
         let selectedMedicine: string = $(this).closest("tr").find("td.aName").text();
-        dashboardController.editMedicine($(this));
+        dashboardController.displayMedicineEditor($(this));
     });
 
     $("tbody.tbodyData").on("click", "td.delete-medicine", function (e) {
-        dashboardController.closeMedicine(e);
+        alert("Not yet implemented");
     });
 
     $('#save').click(function (e) {
         dashboardController.updateMedicine(e);
+        dashboardController.closeMedicineEditor(e);
     });
 
     $('#cancel').click(function (e) {
-        dashboardController.closeMedicine(e);
+        dashboardController.closeMedicineEditor(e);
     });
 
+
+    // Create Category Handlers
+    // ------------------------
+    $("#createMedicineCategory").click(function (e) {
+        dashboardController.closeMedicineEditor(e);
+        dashboardController.displayCategoryEditor(e);
+    });
+
+    $('#save-category').click(function (e) {
+        dashboardController.closeCategoryEditor(e);
+    });
+
+    $('#cancel-category').click(function (e) {
+        dashboardController.closeCategoryEditor(e);
+    });
+
+
+    // Restore / Log Data Handlers
+    // ---------------------------
     $(document).on('click', '#restore-data', function (e) {
         database.storeDefaultData();
     });

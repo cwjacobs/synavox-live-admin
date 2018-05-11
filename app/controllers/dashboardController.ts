@@ -36,12 +36,13 @@ export class DashboardController {
             $('tbody.tbodyData').html(tableRow);
             $('#categoryMedicineList').fadeIn();
         });
+
         if (!categoryFound) {
             alert(`Category: ${category} not found`);
         }
     };
 
-    editMedicine(e: JQuery<HTMLElement>) {
+    displayMedicineEditor(e: JQuery<HTMLElement>) {
         $('.medicineEditor').css("display", "block");
         $('#edit-buttons').css("visibility: visible");
 
@@ -60,7 +61,7 @@ export class DashboardController {
     };
 
     updateMedicine(e: JQuery.Event<HTMLElement, null>) {
-        
+
         let category: string = $("#category-selector").find('option:selected').text();
 
         let name: any = $("#edit-name").val();
@@ -84,12 +85,38 @@ export class DashboardController {
         let medicine: MedicineDataModel = new MedicineDataModel(name, altName, manufacturer, distributor, isGeneric);
 
         this.database.storeMedicineData(category, medicine);
-
-        $('.medicineEditor').css("display", "none");
     }
 
-    closeMedicine(e: JQuery.Event<HTMLElement, null>) {
+    displayCategoryEditor(e: JQuery.Event<HTMLElement, null>) {
+
+        // $('.medicineEditor').css("display", "none");
+
+        // $('.categoryMedicineListForm').css("display", "none");
+
+        $('.addCategoryMedicineListForm').css("display", "block");
+
+        // let tableRowContent: string = '<div class="col-md-3"> <label for="edit-name">Medicine Name</label><input type="text" class="col-md-12" placeholder="Medicine Name"></div>'
+        
+        // let tableRow: string = "";
+
+        // tableRow += '<tr>';
+        // tableRow += '<td ' + tableRowContent + '</td>';
+        // tableRow += '<td class="name" id="' + medicine.name + '">' + medicine.name + '</td>';
+        // tableRow += '<td class="altName">' + medicine.altName + '</td>';
+        // tableRow += '<td class="manufacturer">' + medicine.manufacturer + '</td>';
+        // tableRow += '<td class="distributor">' + medicine.distributor + '</td>';
+        // tableRow += '<td class="isGeneric">' + medicine.isGeneric + '</td>';
+        // tableRow += '<td class="edit-medicine"><i class="fa fa-pencil" areia-hidden="true" style="color: green"></td>';
+        // tableRow += '<td class="delete-medicine"><i class="fa fa-trash" areia-hidden="true" style="color: red"></td>';
+        // $('tbody.tbodyData').html(tableRow);
+    };
+
+    closeMedicineEditor(e: JQuery.Event<HTMLElement, null>) {
         $('.medicineEditor').css("display", "none");
+    };
+
+    closeCategoryEditor(e: JQuery.Event<HTMLElement, null>) {
+        $('.addCategoryMedicineListForm').css("display", "none");
     };
 
 };
