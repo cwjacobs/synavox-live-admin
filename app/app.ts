@@ -62,7 +62,11 @@ $(document).ready(function () {
         dashboardController.displayCategoryEditor(e);
     });
 
-    $('#save-category').click(function (e) {
+    $('#add-medicine').click(function (e) {
+        dashboardController.addMedicineToCategory(e);
+    });
+
+    $('#category-complete').click(function (e) {
         dashboardController.closeCategoryEditor(e);
     });
 

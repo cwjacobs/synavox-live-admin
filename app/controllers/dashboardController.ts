@@ -61,7 +61,6 @@ export class DashboardController {
     };
 
     updateMedicine(e: JQuery.Event<HTMLElement, null>) {
-
         let category: string = $("#category-selector").find('option:selected').text();
 
         let name: any = $("#edit-name").val();
@@ -109,6 +108,9 @@ export class DashboardController {
         // tableRow += '<td class="edit-medicine"><i class="fa fa-pencil" areia-hidden="true" style="color: green"></td>';
         // tableRow += '<td class="delete-medicine"><i class="fa fa-trash" areia-hidden="true" style="color: red"></td>';
         // $('tbody.tbodyData').html(tableRow);
+    };
+
+    addMedicineToCategory(e: JQuery.Event<HTMLElement, null>) {
     };
 
     closeMedicineEditor(e: JQuery.Event<HTMLElement, null>) {
